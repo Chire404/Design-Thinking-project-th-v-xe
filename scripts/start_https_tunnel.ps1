@@ -1,4 +1,4 @@
-# ============================================================================
+﻿# ============================================================================
 # Start VeloPass + Cloudflare HTTPS Tunnel on Windows
 # Supports both Quick HTTPS URL (*.trycloudflare.com) and Named Custom Domain!
 # Usage:
