@@ -6,6 +6,7 @@ import logging
 
 from flask import Flask, request
 from werkzeug.exceptions import HTTPException
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 from backend.config import PROJECT_ROOT, Config
 from backend.database import run_migrations
@@ -29,6 +30,7 @@ def create_app(config_overrides: dict | None = None) -> Flask:
         static_url_path="/static",
     )
     app.config.from_mapping(cfg.to_dict())
+    app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1)
 
     logging.basicConfig(
         level=logging.INFO if cfg.APP_ENV != "testing" else logging.WARNING,

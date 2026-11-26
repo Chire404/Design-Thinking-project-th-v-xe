@@ -218,9 +218,11 @@ Hệ thống sẽ yêu cầu nhập mật khẩu ẩn trên terminal (tối thi�
 
 ---
 
-## 12. Hướng dẫn triển khai Production
+## 12. Hướng dẫn triển khai Production & Tên miền HTTPS thực tế
 
-1. **Bắt buộc bật HTTPS**: Trình duyệt di động và máy tính chỉ cấp quyền Camera (`navigator.mediaDevices.getUserMedia`) cho trang Admin QR Scanner khi chạy trên **HTTPS** (hoặc `localhost`). Đặt **Nginx** hoặc **Caddy** làm Reverse Proxy phía trước `Waitress` (`127.0.0.1:5000`) với chứng chỉ TLS (Let's Encrypt).
+Xem hướng dẫn chi tiết từng bước tại **[docs/HTTPS_DOMAIN_SETUP.md](docs/HTTPS_DOMAIN_SETUP.md)** (bao gồm cả gắn tên miền riêng qua **Cloudflare Zero Trust Tunnel** lẫn triển khai **VPS + Caddy tự cấp SSL Let's Encrypt** với `deploy/docker-compose.https.yml` và `scripts/start_https_tunnel.ps1`).
+
+1. **Bắt buộc bật HTTPS**: Trình duyệt di động và máy tính chỉ cấp quyền Camera (`navigator.mediaDevices.getUserMedia`) cho trang Admin QR Scanner khi chạy trên **HTTPS** (hoặc `localhost`). Đặt **Caddy**, **Nginx** hoặc **Cloudflare Tunnel** phía trước `Waitress` (`127.0.0.1:5000`).
 2. **Cấu hình Nginx hỗ trợ SSE thời gian thực**:
    ```nginx
    location / {
